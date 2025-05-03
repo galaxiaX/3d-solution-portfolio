@@ -1,5 +1,6 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import Link from 'next/link';
+import { useRef, useEffect, useState } from 'react';
 
 const useScrollSmoothController = (
   mainRef: React.RefObject<HTMLElement | null>
@@ -72,13 +73,18 @@ export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
 
   useScrollSmoothController(mainRef);
-
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <main
       ref={mainRef}
-      className='flex h-[100dvh] overflow-x-scroll overflow-y-hidden'
+      onScroll={() => setShowMenu(false)}
+      className={`flex h-[100dvh] overflow-x-scroll overflow-y-hidden ${showMenu ? 'scroll-smooth' : ''}`}
     >
-      <section className='relative h-[100dvh] w-[100dvw] shrink-0 bg-gradient-to-tr from-[#8EBBEF] to-[#BEEAFB] shadow-xl'>
+      <Nav showMenu={showMenu} setShowMenu={setShowMenu} />
+      <section
+        id='home'
+        className='relative h-[100dvh] w-[100dvw] shrink-0 bg-gradient-to-tr from-[#8EBBEF] to-[#BEEAFB] shadow-xl'
+      >
         <div className='absolute top-[5%] left-[5%] m-12 text-4xl font-semibold'>
           3DSolution
         </div>
@@ -99,7 +105,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className='grid h-[100dvh] w-[100dvw] shrink-0 grid-cols-2 shadow-xl'>
+      <section
+        id='about'
+        className='grid h-[100dvh] w-[100dvw] shrink-0 grid-cols-2 shadow-xl'
+      >
         <div className='grid grid-rows-2'>
           <div className='h-full w-full shrink-0 bg-red-400'></div>
           <div className='h-full w-full shrink-0 bg-blue-400'></div>
@@ -128,7 +137,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className='flex h-[100dvh] w-[100dvw] shrink-0 items-center justify-center shadow-xl'>
+      <section
+        id='services'
+        className='flex h-[100dvh] w-[100dvw] shrink-0 items-center justify-center shadow-xl'
+      >
         <div className='grid h-full max-h-[60%] w-full max-w-[90%] grid-cols-4 grid-rows-2 gap-2'>
           <div className='col-span-2 shrink-0 p-16 text-6xl font-medium text-[#38b6ff]'>
             Our services
@@ -158,7 +170,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className='grid h-[100dvh] w-[100dvw] shrink-0 grid-cols-11 shadow-xl'>
+      <section
+        id='contact'
+        className='grid h-[100dvh] w-[100dvw] shrink-0 grid-cols-11 shadow-xl'
+      >
         <div className='col-span-5 p-16 text-6xl font-medium text-[#38b6ff]'>
           Contact
         </div>
@@ -210,3 +225,63 @@ export default function Home() {
     </main>
   );
 }
+
+const Nav = ({
+  showMenu,
+  setShowMenu
+}: {
+  showMenu: boolean;
+  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const menuList = [
+    {
+      title: 'Home',
+      link: '#home'
+    },
+    {
+      title: 'About',
+      link: '#about'
+    },
+    {
+      title: 'Services',
+      link: '#services'
+    },
+    {
+      title: 'Contact',
+      link: '#contact'
+    }
+  ];
+
+  const onClick = () => {
+    setShowMenu(!showMenu);
+  };
+  return (
+    <>
+      <button
+        onClick={onClick}
+        className='fixed top-1/2 left-[5%] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#38b6ff] text-xs font-semibold drop-shadow-2xl'
+      >
+        Menu
+      </button>
+
+      <div
+        onClick={onClick}
+        className={`absolute z-[1] h-full w-full cursor-default bg-black ${showMenu ? 'opacity-20' : 'pointer-events-none opacity-0'} transition-all duration-500`}
+      />
+
+      <nav
+        className={`fixed top-1/2 left-[10%] z-10 flex -translate-y-1/2 flex-col gap-4 drop-shadow-2xl ${showMenu ? 'translate-x-0' : 'pointer-events-none -translate-x-[120%] scale-0 opacity-0'} transition-all duration-500`}
+      >
+        {menuList.map((menu, index) => (
+          <Link
+            key={index}
+            href={menu.link}
+            className='flex h-12 w-12 items-center justify-center rounded-full bg-[#38b6ff] text-xs font-semibold drop-shadow'
+          >
+            {menu.title}
+          </Link>
+        ))}
+      </nav>
+    </>
+  );
+};
