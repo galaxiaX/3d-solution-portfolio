@@ -259,18 +259,18 @@ const Nav = ({
     <>
       <button
         onClick={onClick}
-        className='fixed top-1/2 left-[5%] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#38b6ff] text-xs font-semibold drop-shadow-2xl'
+        className='fixed top-1/2 left-[5%] z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#38b6ff] text-xs font-semibold drop-shadow-2xl'
       >
         Menu
       </button>
 
       <div
         onClick={onClick}
-        className={`absolute z-[1] h-full w-full cursor-default bg-black ${showMenu ? 'opacity-20' : 'pointer-events-none opacity-0'} transition-all duration-500`}
+        className={`absolute z-[1] h-full w-full cursor-default bg-black ${showMenu ? 'opacity-10' : 'pointer-events-none opacity-0'} transition-all duration-500`}
       />
 
       <nav
-        className={`fixed top-1/2 left-[10%] z-10 flex -translate-y-1/2 flex-col gap-4 drop-shadow-2xl ${showMenu ? 'translate-x-0' : 'pointer-events-none -translate-x-[120%] scale-0 opacity-0'} transition-all duration-500`}
+        className={`fixed top-1/2 left-[10%] z-10 flex -translate-y-1/2 flex-col gap-4 drop-shadow-2xl ${showMenu ? 'translate-x-0' : 'pointer-events-none -translate-x-[120%] scale-[0.25] opacity-0'} transition-all duration-300`}
       >
         {menuList.map((menu, index) => (
           <Link
