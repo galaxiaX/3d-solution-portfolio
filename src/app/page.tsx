@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useRef, useEffect, useState } from 'react';
 
 const useScrollSmoothController = (
-  mainRef: React.RefObject<HTMLElement | null>
+  mainRef: React.RefObject<HTMLElement | null>,
+  setActiveSection: React.Dispatch<React.SetStateAction<string>>
 ) => {
   useEffect(() => {
     const mainElement = mainRef.current;
@@ -55,32 +56,77 @@ const useScrollSmoothController = (
         currentSection--;
       }
 
+      // Update active section
+      const sectionId = sections[currentSection].id;
+      setActiveSection(sectionId || '');
+
       // Adjust this value to control the scroll speed (higher = slower)
       const scrollDuration = 1200;
 
       smoothScrollTo(sections[currentSection], scrollDuration);
     };
 
+    // Function to detect current section on scroll
+    const handleScroll = () => {
+      if (isScrolling) return;
+
+      const scrollPosition = mainElement.scrollLeft;
+      let newActiveSection = '';
+
+      // Find which section is most visible
+      sections.forEach((section, index) => {
+        const sectionLeft =
+          section.getBoundingClientRect().left +
+          mainElement.scrollLeft -
+          mainElement.getBoundingClientRect().left;
+        const sectionRight =
+          sectionLeft + section.getBoundingClientRect().width;
+
+        if (
+          scrollPosition >= sectionLeft - 100 &&
+          scrollPosition < sectionRight - 100
+        ) {
+          currentSection = index;
+          newActiveSection = section.id || '';
+        }
+      });
+
+      if (newActiveSection) {
+        setActiveSection(newActiveSection);
+      }
+    };
+
     mainElement.addEventListener('wheel', handleWheel, { passive: false });
+    mainElement.addEventListener('scroll', handleScroll);
+
+    // Initial detection of active section
+    setTimeout(handleScroll, 100);
 
     return () => {
       mainElement.removeEventListener('wheel', handleWheel);
+      mainElement.removeEventListener('scroll', handleScroll);
     };
-  }, [mainRef]);
+  }, [mainRef, setActiveSection]);
 };
 
 export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
-
-  useScrollSmoothController(mainRef);
   const [showMenu, setShowMenu] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useScrollSmoothController(mainRef, setActiveSection);
+
   return (
     <main
       ref={mainRef}
       onScroll={() => setShowMenu(false)}
       className={`flex h-[100dvh] overflow-x-scroll overflow-y-hidden ${showMenu ? 'scroll-smooth' : ''}`}
     >
-      <Nav showMenu={showMenu} setShowMenu={setShowMenu} />
+      <Nav
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+        activeSection={activeSection}
+      />
       <section
         id='home'
         className='relative h-[100dvh] w-[100dvw] shrink-0 bg-gradient-to-tr from-[#8EBBEF] to-[#BEEAFB] shadow-xl'
@@ -228,33 +274,40 @@ export default function Home() {
 
 const Nav = ({
   showMenu,
-  setShowMenu
+  setShowMenu,
+  activeSection
 }: {
   showMenu: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  activeSection: string;
 }) => {
   const menuList = [
     {
       title: 'Home',
-      link: '#home'
+      link: '#home',
+      id: 'home'
     },
     {
       title: 'About',
-      link: '#about'
+      link: '#about',
+      id: 'about'
     },
     {
       title: 'Services',
-      link: '#services'
+      link: '#services',
+      id: 'services'
     },
     {
       title: 'Contact',
-      link: '#contact'
+      link: '#contact',
+      id: 'contact'
     }
   ];
 
   const onClick = () => {
     setShowMenu(!showMenu);
   };
+
   return (
     <>
       <button
@@ -276,7 +329,11 @@ const Nav = ({
           <Link
             key={index}
             href={menu.link}
-            className='flex h-12 w-12 items-center justify-center rounded-full bg-[#38b6ff] text-xs font-semibold drop-shadow'
+            className={`flex h-12 w-12 items-center justify-center rounded-full text-xs font-semibold drop-shadow transition-all duration-300 ${
+              activeSection === menu.id
+                ? 'scale-110 bg-white text-[#38b6ff]'
+                : 'bg-[#38b6ff] text-white'
+            }`}
           >
             {menu.title}
           </Link>
