@@ -1,5 +1,4 @@
 import TypeWriter from '@/components/TypeWriter';
-import Link from 'next/link';
 import { FiBox } from 'react-icons/fi';
 
 const Hero = () => {
@@ -25,12 +24,17 @@ const Hero = () => {
               simplify, and accelerate your business
             </div>
           </div>
-          <Link
-            href={'/#contact'}
+          <button
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className='w-fit rounded-full bg-[#38B6FF] px-4 py-2'
           >
             Contact us
-          </Link>
+          </button>
         </div>
       </div>
     </section>
