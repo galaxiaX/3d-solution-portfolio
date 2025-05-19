@@ -33,11 +33,12 @@ const TypeWriter = ({ text, loop }: Props) => {
           }
           return prevText.slice(0, -1);
         });
-      }, 100);
+      }, 50);
 
       return () => clearInterval(decreaseInterval);
     }
-  }, [isAdding, loop, text]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAdding, loop]);
 
   return (
     <>
