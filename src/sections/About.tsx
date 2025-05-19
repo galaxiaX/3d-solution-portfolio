@@ -6,28 +6,51 @@ const About = () => {
   return (
     <section
       id='about'
-      className='grid h-[100dvh] w-[100dvw] shrink-0 grid-cols-2 shadow-xl'
+      className='flex h-fit w-[100dvw] shrink-0 flex-col overflow-hidden md:grid md:h-[100dvh] md:grid-cols-2 md:shadow-xl'
     >
-      <div className='grid grid-rows-2 gap-[1px]'>
-        <div className='relative h-full w-full shrink-0 bg-red-400'>
+      <div className='grid w-full gap-[1px] max-md:hidden md:grid-rows-2'>
+        <div className='relative h-full w-full shrink-0'>
           <Image
             src={ImageAbout1}
             fill
             sizes='(max-width: 768px) 100vw, 50vw'
+            style={{ objectFit: 'cover' }}
             alt='image-about-1'
           />
         </div>
-        <div className='relative h-full w-full shrink-0 bg-blue-400'>
+        <div className='relative h-full w-full shrink-0'>
           <Image
             src={ImageAbout2}
             fill
             sizes='(max-width: 768px) 100vw, 50vw'
+            style={{ objectFit: 'cover' }}
             alt='image-about-2'
           />
         </div>
       </div>
-      <div className='flex flex-col gap-16 p-20'>
+      <div className='flex flex-col gap-16 max-md:px-[7%] max-md:py-20 md:p-20'>
         <div className='text-6xl font-medium text-[#38b6ff]'>About Us</div>
+
+        <div className='grid aspect-[2] w-full grid-cols-2 gap-[1px] md:hidden'>
+          <div className='relative aspect-square h-full w-full shrink-0'>
+            <Image
+              src={ImageAbout1}
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
+              style={{ objectFit: 'cover' }}
+              alt='image-about-1'
+            />
+          </div>
+          <div className='relative aspect-square h-full w-full shrink-0'>
+            <Image
+              src={ImageAbout2}
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
+              style={{ objectFit: 'cover' }}
+              alt='image-about-2'
+            />
+          </div>
+        </div>
 
         <div className='text-lg text-[#535353]'>
           At 3DSolution, we are dedicated to pioneering innovative solutions in

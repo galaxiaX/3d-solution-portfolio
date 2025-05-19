@@ -7,6 +7,7 @@ export const useScrollSmoothController = (
   useEffect(() => {
     const mainElement = mainRef.current;
     if (!mainElement) return;
+    if (window.innerWidth < 768) return;
 
     let isScrolling = false;
     let currentSection = 0;

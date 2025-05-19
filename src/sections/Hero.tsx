@@ -1,18 +1,23 @@
+import TypeWriter from '@/components/TypeWriter';
+import Link from 'next/link';
+import { FiBox } from 'react-icons/fi';
+
 const Hero = () => {
   return (
     <section
       id='home'
-      className='relative h-[100dvh] w-[100dvw] shrink-0 bg-gradient-to-tr from-[#8EBBEF] to-[#BEEAFB] shadow-xl'
+      className='relative h-[100dvh] w-[100dvw] shrink-0 bg-gradient-to-tr from-[#8EBBEF] to-[#BEEAFB] md:shadow-xl'
     >
-      <div className='absolute top-[5%] left-[5%] m-12 text-4xl font-semibold'>
+      <div className='flex items-center gap-1 text-4xl font-semibold max-md:p-[7%] md:absolute md:top-[5%] md:left-[5%] md:m-12'>
+        <FiBox />
         3DSolution
       </div>
 
-      <div className='absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 justify-end'>
-        <div className='flex w-[80%] flex-col items-center gap-8'>
+      <div className='flex w-full justify-center max-md:h-full max-md:py-24 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:justify-end'>
+        <div className='flex flex-col items-center gap-8 md:w-[80%]'>
           <div className='flex flex-col gap-4'>
-            <div className='text-[44px] font-medium'>
-              Smart Solution, Real Impact
+            <div className='w-full text-[44px] font-medium max-md:text-center md:min-w-[615px] md:whitespace-nowrap'>
+              <TypeWriter loop text='Smart Solution, Real Impact' />
             </div>
             <div className='text-center text-[24px] font-medium'>
               Custom software solutions designed to scale,
@@ -20,9 +25,12 @@ const Hero = () => {
               simplify, and accelerate your business
             </div>
           </div>
-          <button className='w-fit rounded-full bg-[#38B6FF] px-4 py-2'>
+          <Link
+            href={'/#contact'}
+            className='w-fit rounded-full bg-[#38B6FF] px-4 py-2'
+          >
             Contact us
-          </button>
+          </Link>
         </div>
       </div>
     </section>

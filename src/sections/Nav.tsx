@@ -14,47 +14,47 @@ type Props = {
   activeSection: string;
 };
 
-const Nav = ({ showMenu, setShowMenu, activeSection }: Props) => {
-  const menuList = [
-    {
-      title: 'Home',
-      link: '#home',
-      id: 'home',
-      icon: <BsHouseFill />
-    },
-    {
-      title: 'About',
-      link: '#about',
-      id: 'about',
-      icon: <BsFillInfoCircleFill />
-    },
-    {
-      title: 'Services',
-      link: '#services',
-      id: 'services',
-      icon: <BsCodeSlash />
-    },
-    {
-      title: 'Location',
-      link: '#location',
-      id: 'location',
-      icon: <IoMdPin />
-    },
-    {
-      title: 'Contact',
-      link: '#contact',
-      id: 'contact',
-      icon: <FiMail />
-    }
-  ];
+const menuList = [
+  {
+    title: 'Home',
+    link: '#home',
+    id: 'home',
+    icon: <BsHouseFill />
+  },
+  {
+    title: 'About',
+    link: '#about',
+    id: 'about',
+    icon: <BsFillInfoCircleFill />
+  },
+  {
+    title: 'Services',
+    link: '#services',
+    id: 'services',
+    icon: <BsCodeSlash />
+  },
+  {
+    title: 'Location',
+    link: '#location',
+    id: 'location',
+    icon: <IoMdPin />
+  },
+  {
+    title: 'Contact',
+    link: '#contact',
+    id: 'contact',
+    icon: <FiMail />
+  }
+];
 
+const Nav = ({ showMenu, setShowMenu, activeSection }: Props) => {
   const onClick = () => setShowMenu(!showMenu);
 
   return (
     <>
       <button
         onClick={onClick}
-        className='fixed top-1/2 left-[5%] z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-[#38b6ff] text-lg font-semibold text-white drop-shadow-2xl'
+        className='fixed left-[5%] z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#38b6ff] text-lg font-semibold text-white drop-shadow-2xl max-md:bottom-[20%] md:top-1/2 md:-translate-y-1/2'
       >
         <BsList />
       </button>
@@ -65,7 +65,7 @@ const Nav = ({ showMenu, setShowMenu, activeSection }: Props) => {
       />
 
       <nav
-        className={`fixed top-1/2 left-[10%] z-10 flex -translate-y-1/2 flex-col gap-4 drop-shadow-2xl ${showMenu ? 'translate-x-0' : 'pointer-events-none -translate-x-[120%] scale-[0.25] opacity-0'} transition-all duration-300`}
+        className={`fixed left-[20%] z-10 flex flex-col gap-4 drop-shadow-2xl max-md:bottom-[5%] md:top-1/2 md:left-[10%] md:-translate-y-1/2 ${showMenu ? 'translate-x-0' : 'pointer-events-none -translate-x-[120%] scale-[0.25] opacity-0'} transition-all duration-300`}
       >
         {menuList.map((menu, index) => (
           <Link
