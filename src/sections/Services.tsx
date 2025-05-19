@@ -22,7 +22,7 @@ const Services = () => {
         <div className='col-span-2 shrink-0 p-16 text-6xl font-medium text-[#38b6ff]'>
           Our services
         </div>
-        <div className='relative shrink-0 bg-red-400'>
+        <div className='relative shrink-0'>
           <Image
             src={ImageServices1}
             fill
@@ -35,7 +35,7 @@ const Services = () => {
             IT System Consulting Service
           </div>
         </div>
-        <div className='relative row-span-2 shrink-0 bg-red-400'>
+        <div className='relative row-span-2 shrink-0'>
           <Image
             src={ImageServices2}
             fill
@@ -49,7 +49,7 @@ const Services = () => {
           </div>
         </div>
         <div className='shrink-0'></div>
-        <div className='relative shrink-0 bg-red-400'>
+        <div className='relative shrink-0'>
           <Image
             src={ImageServices3}
             fill
@@ -62,7 +62,7 @@ const Services = () => {
             Fintech Solution
           </div>
         </div>
-        <div className='relative shrink-0 bg-red-400'>
+        <div className='relative shrink-0'>
           <Image
             src={ImageServices4}
             fill
