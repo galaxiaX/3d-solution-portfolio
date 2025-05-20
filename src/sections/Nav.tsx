@@ -54,7 +54,7 @@ const Nav = ({ showMenu, setShowMenu, activeSection }: Props) => {
     <>
       <button
         onClick={onClick}
-        className='fixed left-[5%] z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#38b6ff] text-lg font-semibold text-white drop-shadow-2xl max-md:bottom-[20%] md:top-1/2 md:-translate-y-1/2'
+        className='fixed left-[5%] z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#38b6ff] text-lg font-semibold text-white drop-shadow-2xl duration-300 hover:scale-110 active:scale-80 max-md:bottom-[20%] md:top-1/2 md:-translate-y-1/2'
       >
         <BsList />
       </button>
@@ -71,13 +71,17 @@ const Nav = ({ showMenu, setShowMenu, activeSection }: Props) => {
           <Link
             key={index}
             href={menu.link}
-            className={`flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold drop-shadow transition-all duration-300 ${
+            className={`relative flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold drop-shadow transition-all duration-300 ${
               activeSection === menu.id
                 ? 'scale-110 bg-white text-[#38b6ff]'
-                : 'bg-[#38b6ff] text-white'
+                : 'group bg-[#38b6ff] text-white opacity-75 hover:scale-110 hover:opacity-100 active:scale-80'
             }`}
           >
-            {menu.icon}
+            <span className='group-hover:animate-spin'>{menu.icon}</span>
+
+            <div className='absolute top-1/2 left-[130%] -translate-y-1/2 text-lg font-medium drop-shadow group-hover:animate-pulse'>
+              {menu.title}
+            </div>
           </Link>
         ))}
       </nav>

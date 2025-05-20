@@ -27,7 +27,7 @@ const Services = () => {
       ref={sectionRef}
       className='flex w-[100dvw] shrink-0 md:h-[100dvh] md:items-center md:justify-center md:shadow-xl'
     >
-      <div className='grid h-full w-full shrink-0 gap-2 overflow-visible max-md:p-[7%] md:max-h-[60%] md:max-w-[90%] md:grid-cols-4 md:grid-rows-2'>
+      <div className='grid h-full w-full shrink-0 gap-2 overflow-visible max-md:p-[7%] md:max-h-[60%] md:max-w-[90%] md:grid-cols-4 md:grid-rows-2 [&>*]:overflow-hidden [&>*>img]:duration-300 [&>*>img]:hover:scale-110'>
         <div className='col-span-2 shrink-0 text-6xl font-medium text-[#38b6ff] max-md:py-16 md:p-16'>
           Our services
         </div>

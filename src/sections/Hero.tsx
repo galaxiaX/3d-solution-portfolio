@@ -2,6 +2,13 @@ import TypeWriter from '@/components/TypeWriter';
 import { FiBox } from 'react-icons/fi';
 
 const Hero = () => {
+  const onClickContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id='home'
@@ -25,13 +32,8 @@ const Hero = () => {
             </div>
           </div>
           <button
-            onClick={() => {
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            className='w-fit rounded-full bg-[#38B6FF] px-4 py-2'
+            onClick={onClickContact}
+            className='w-fit rounded-full bg-[#38B6FF] px-4 py-2 duration-300 hover:scale-110 active:scale-80'
           >
             Contact us
           </button>
